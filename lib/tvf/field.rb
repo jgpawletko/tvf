@@ -17,10 +17,13 @@ module TVF
     end
 
     def valid?
-      result = true
-      DATA_TYPE_ATTRIBUTES.each { |attr| result &&= VALID_DATA_TYPES.include? self.send(attr) }
-      BOOLEAN_ATTRIBUTES.each { |attr| result &&= [true, false].include? self.send(attr) }
-      result
+      result = DATA_TYPE_ATTRIBUTES.inject(true) { |a, e| a && (VALID_DATA_TYPES.include? send(e)) }
+      BOOLEAN_ATTRIBUTES.inject(result) { |a, e| a && ([true, false].include? send(e)) }
+    end
+
+    def ==(other)
+      # compare all attributes of this object to all attributes of other object
+      ALL_ATTRIBUTES.inject(true) { |a, e| a && (other.send(e) == send(e)) }
     end
   end
 end
