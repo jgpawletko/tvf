@@ -60,8 +60,7 @@ module TVF
     end
 
     let(:invalid_field_args) do
-      x = valid_args.clone
-      x[:fields][:identifier] = valid_args[:fields][:identifier].clone
+      x = valid_args
       x[:fields][:identifier][:indexed] = 'Wow! What am I doing here?'
       x
     end
@@ -76,6 +75,12 @@ module TVF
         searchable: false,
         stored: true
       }
+    end
+
+    let(:invalid_namespace_args) do
+      x = valid_args
+      x[:info][:namespace] = nil
+      x
     end
 
     describe '#namespace' do
@@ -101,6 +106,10 @@ module TVF
       end
       context 'with an invalid field' do
         subject { Vocabulary.new(invalid_field_args) }
+        it { should_not be_valid }
+      end
+      context 'with an invalid namespace' do
+        subject { Vocabulary.new(invalid_namespace_args) }
         it { should_not be_valid }
       end
     end

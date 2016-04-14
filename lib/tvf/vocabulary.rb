@@ -11,7 +11,8 @@ module TVF
 
     def valid?
       result = true
-      result && fields_valid?
+      result &&= fields_valid?
+      result && namespace_valid?
     end
 
     private
@@ -34,6 +35,10 @@ module TVF
 
     def fields_valid?
       fields.values.inject(true) { |a, e| a && e.valid? }
+    end
+
+    def namespace_valid?
+      ! @namespace.nil?
     end
   end
 end
