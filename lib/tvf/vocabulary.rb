@@ -1,12 +1,17 @@
 module TVF
   # class stores vocabulary information and associated fields
-  class Vocabulary 
+  class Vocabulary
     attr_reader :namespace, :uri, :fields
     def initialize(v)
       @namespace = v[:info][:namespace]
       @uri = v[:info][:uri]
       @fields = init_fields(v[:fields])
       add_field_methods
+    end
+
+    def valid?
+      result = true
+      result && fields_valid?
     end
 
     private
@@ -25,6 +30,10 @@ module TVF
           fields[k]
         end
       end
+    end
+
+    def fields_valid?
+      fields.values.inject(true) { |a, e| a && e.valid? }
     end
   end
 end

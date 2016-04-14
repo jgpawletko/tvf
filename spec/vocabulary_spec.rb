@@ -59,6 +59,35 @@ module TVF
       }
     end
 
+    let(:invalid_field_args) do
+      { info:
+        { namespace: 'RDF::DC',
+          uri: 'http://purl.org/dc/terms/'
+        },
+        # Mandatory Fields
+        fields: {
+          title: {
+            data_type: 'text',
+            facetable: false,
+            indexed: true,
+            mandatory: true,
+            multiple: true,
+            searchable: true,
+            stored: true
+          },
+          identifier: {
+            data_type: 'text',
+            facetable: false,
+            indexed: 'Wow! What am I doing here?',
+            mandatory: true,
+            multiple: false,
+            searchable: true,
+            stored: true
+          }
+        }
+      }
+    end
+
     describe '#namespace' do
       subject { Vocabulary.new(valid_args).namespace }
       it { should == 'RDF::DC' }
@@ -84,6 +113,17 @@ module TVF
       let(:expected) { Field.new(field_arg) }
       subject { Vocabulary.new(valid_args).date }
       it { should == expected }
+    end
+
+    describe '#valid?' do
+      context 'with valid fields' do
+        subject { Vocabulary.new(valid_args) }
+        it { should be_valid }
+      end
+      context 'with an invalid field' do
+        subject { Vocabulary.new(invalid_field_args) }
+        it { should_not be_valid }
+      end
     end
   end
 end
