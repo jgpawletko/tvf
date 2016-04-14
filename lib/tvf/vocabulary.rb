@@ -14,6 +14,17 @@ module TVF
     def initialize(v)
       @namespace = v[:info][:namespace]
       @uri = v[:info][:uri]
+      @fields = init_fields(v[:fields])
+    end
+
+    private
+
+    def init_fields(arg)
+      hash = {}
+      arg.each_pair do |k, v|
+        hash[k] = Field.new(v)
+      end
+      hash
     end
   end
 end
