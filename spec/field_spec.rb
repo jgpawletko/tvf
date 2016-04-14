@@ -11,9 +11,15 @@ module TVF
         stored: true }
     end
 
-    let(:invalid_args) do
+    let(:invalid_boolean_args) do
       x = valid_args.clone
       x[:mandatory] = 'hahaha'
+      x
+    end
+
+    let(:invalid_data_type_args) do
+      x = valid_args.clone
+      x[:data_type] = 'hohoho'
       x
     end
 
@@ -33,8 +39,13 @@ module TVF
         it { should be_valid }
       end
 
-      context 'with invalid arguments' do
-        subject { Field.new(invalid_args) }
+      context 'with invalid boolean arguments' do
+        subject { Field.new(invalid_boolean_args) }
+        it { should_not be_valid }
+      end
+
+      context 'with invalid data_type arguments' do
+        subject { Field.new(invalid_data_type_args) }
         it { should_not be_valid }
       end
     end
