@@ -22,5 +22,10 @@ module TVF
       BOOLEAN_ATTRIBUTES.each { |attr| result &&= [true, false].include? self.send(attr) }
       result
     end
+
+    def ==(other)
+      # compare all attributes of this object to all attributes of other object
+      ALL_ATTRIBUTES.inject(true) { |a, e| a && (other.send(e) == send(e)) }
+    end
   end
 end

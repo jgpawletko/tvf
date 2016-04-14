@@ -28,5 +28,13 @@ module TVF
         it { should_not be_valid }
       end
     end
+
+    describe '#==' do
+      context 'with equivalent object' do
+        let(:other) { Field.new(valid_args) }
+        subject { Field.new(valid_args) }
+        it { should == other }
+      end
+    end
   end
 end
