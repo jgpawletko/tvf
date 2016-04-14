@@ -60,31 +60,21 @@ module TVF
     end
 
     let(:invalid_field_args) do
-      { info:
-        { namespace: 'RDF::DC',
-          uri: 'http://purl.org/dc/terms/'
-        },
-        # Mandatory Fields
-        fields: {
-          title: {
-            data_type: 'text',
-            facetable: false,
-            indexed: true,
-            mandatory: true,
-            multiple: true,
-            searchable: true,
-            stored: true
-          },
-          identifier: {
-            data_type: 'text',
-            facetable: false,
-            indexed: 'Wow! What am I doing here?',
-            mandatory: true,
-            multiple: false,
-            searchable: true,
-            stored: true
-          }
-        }
+      x = valid_args.clone
+      x[:fields][:identifier] = valid_args[:fields][:identifier].clone
+      x[:fields][:identifier][:indexed] = 'Wow! What am I doing here?'
+      x
+    end
+
+    let(:field_arg) do
+      {
+        data_type: 'integer',
+        facetable: true,
+        indexed: true,
+        mandatory: true,
+        multiple: false,
+        searchable: false,
+        stored: true
       }
     end
 
@@ -99,17 +89,6 @@ module TVF
     end
 
     describe 'field singleton methods' do
-      let(:field_arg) {
-        {
-          data_type: 'integer',
-          facetable: true,
-          indexed: true,
-          mandatory: true,
-          multiple: false,
-          searchable: false,
-          stored: true
-        }
-      }
       let(:expected) { Field.new(field_arg) }
       subject { Vocabulary.new(valid_args).date }
       it { should == expected }
