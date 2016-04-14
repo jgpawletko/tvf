@@ -62,5 +62,13 @@ module TVF
         it { should_not == other }
       end
     end
+
+    describe "accessors" do
+      let(:field) { Field.new(valid_args) }
+      describe "#data_type" do
+        subject { field.data_type }
+        it { should == 'integer'}
+      end
+    end
   end
 end
