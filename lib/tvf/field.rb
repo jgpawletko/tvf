@@ -10,14 +10,7 @@ module TVF
     attr_reader *ALL_ATTRIBUTES
 
     def initialize(args)
-      # stupid implementation for now.
-      @data_type = args[:data_type]
-      @facetable = args[:facetable]
-      @indexed = args[:indexed]
-      @mandatory = args[:mandatory]
-      @multiple  = args[:multiple]
-      @searchable = args[:searchable]
-      @stored = args[:stored]
+      ALL_ATTRIBUTES.each { |k| instance_variable_set("@#{k}", args[k]) }
     end
 
     def valid?
