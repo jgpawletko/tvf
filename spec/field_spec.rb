@@ -73,6 +73,26 @@ module TVF
         subject { field.facetable }
         it { should be true }
       end
+      describe '#indexed' do
+        subject { field.indexed }
+        it { should be true }
+      end
+      describe '#mandatory' do
+        subject { field.mandatory }
+        it { should be true }
+      end
+      describe '#multiple' do
+        subject { field.multiple }
+        it { should be false }
+      end
+      describe '#searchable' do
+        subject { field.searchable }
+        it { should be false }
+      end
+      describe '#stored' do
+        subject { field.stored }
+        it { should be true }
+      end
     end
   end
 end
