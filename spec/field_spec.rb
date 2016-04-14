@@ -69,6 +69,10 @@ module TVF
         subject { field.data_type }
         it { should == 'integer'}
       end
+      describe "#facetable" do
+        subject { field.facetable }
+        it { should be true }
+      end
     end
   end
 end
