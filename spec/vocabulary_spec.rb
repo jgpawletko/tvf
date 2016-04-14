@@ -3,8 +3,8 @@ module TVF
   describe Vocabulary do
     let(:valid_args) do
       { info:
-        { namespace: "RDF::DC",
-          uri: "http://purl.org/dc/terms/"
+        { namespace: 'RDF::DC',
+          uri: 'http://purl.org/dc/terms/'
         },
         # Mandatory Fields
         fields: {
@@ -35,7 +35,7 @@ module TVF
             mandatory: false,
             multiple: true,
             searchable: true,
-            stored: true,
+            stored: true
           },
           creator: {
             data_type: 'text',
@@ -63,19 +63,10 @@ module TVF
       subject { Vocabulary.new(valid_args).namespace }
       it { should == 'RDF::DC' }
     end
+
+    describe '#uri' do
+      subject { Vocabulary.new(valid_args).uri }
+      it { should == 'http://purl.org/dc/terms/' }
+    end
   end
 end
-
-#     describe '#valid' do
-#       context 'with valid arguments' do
-#         subject { Field.new(valid_args) }
-#         it { should be_valid }
-#       end
-
-#       context 'with invalid arguments' do
-#         subject { Field.new(invalid_args) }
-#         it { should_not be_valid }
-#       end
-#     end
-#   end
-# end
