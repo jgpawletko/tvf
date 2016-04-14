@@ -12,7 +12,8 @@ module TVF
     def valid?
       result = true
       result &&= fields_valid?
-      result && namespace_valid?
+      result &&= namespace_valid?
+      result && uri_valid?
     end
 
     private
@@ -38,7 +39,11 @@ module TVF
     end
 
     def namespace_valid?
-      ! @namespace.nil?
+      !namespace.nil?
+    end
+
+    def uri_valid?
+      !uri.nil?
     end
   end
 end

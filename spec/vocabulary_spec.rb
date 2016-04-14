@@ -83,6 +83,12 @@ module TVF
       x
     end
 
+    let(:invalid_uri_args) do
+      x = valid_args
+      x[:info][:uri] = nil
+      x
+    end
+
     describe '#namespace' do
       subject { Vocabulary.new(valid_args).namespace }
       it { should == 'RDF::DC' }
@@ -110,6 +116,10 @@ module TVF
       end
       context 'with an invalid namespace' do
         subject { Vocabulary.new(invalid_namespace_args) }
+        it { should_not be_valid }
+      end
+      context 'with an invalid uri' do
+        subject { Vocabulary.new(invalid_uri_args) }
         it { should_not be_valid }
       end
     end
