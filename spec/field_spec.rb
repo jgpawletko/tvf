@@ -19,13 +19,13 @@ module TVF
 
     describe '#valid' do
       context 'with valid arguments' do
-        subject { Field.new(valid_args).valid? }
-        it { should be true }
+        subject { Field.new(valid_args) }
+        it { should be_valid }
       end
 
       context 'with invalid arguments' do
-        subject { Field.new(invalid_args).valid? }
-        it { should_not be true }
+        subject { Field.new(invalid_args) }
+        it { should_not be_valid }
       end
     end
   end
