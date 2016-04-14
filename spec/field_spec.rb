@@ -63,13 +63,13 @@ module TVF
       end
     end
 
-    describe "accessors" do
+    describe 'accessors' do
       let(:field) { Field.new(valid_args) }
-      describe "#data_type" do
+      describe '#data_type' do
         subject { field.data_type }
         it { should == 'integer'}
       end
-      describe "#facetable" do
+      describe '#facetable' do
         subject { field.facetable }
         it { should be true }
       end
