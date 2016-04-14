@@ -10,13 +10,13 @@ module TVF
     attr_reader *ALL_ATTRIBUTES
 
     def initialize(args)
-      ALL_ATTRIBUTES.each { |k| instance_variable_set("@#{k}", args[k]) }
+      ALL_ATTRIBUTES.each { |attr| instance_variable_set("@#{attr}", args[attr]) }
     end
 
     def valid?
       result = true
-      DATA_TYPE_ATTRIBUTES.each { |k| result &&= VALID_DATA_TYPES.include? self.send(k) }
-      BOOLEAN_ATTRIBUTES.each { |k| result &&= [true, false].include? self.send(k) }
+      DATA_TYPE_ATTRIBUTES.each { |attr| result &&= VALID_DATA_TYPES.include? self.send(attr) }
+      BOOLEAN_ATTRIBUTES.each { |attr| result &&= [true, false].include? self.send(attr) }
       result
     end
   end
