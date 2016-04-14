@@ -1,20 +1,12 @@
 module TVF
   # class stores vocabulary information and associated fields
-  # lib/nyu/vocabulary.rb
-  # interface:
-  #   #namespace  - returns vocabulary's namespace
-  #   #uri        - returns vocabulary's URI
-  #   #terms      - returns vocabulary's terms
-  #
-  class Vocabulary # forgot that Ichabod::Vocabulary is already defined...
-    # so we may want to name this class something else
-    # using NYU parent module to avoid namespace clash
-
+  class Vocabulary 
     attr_reader :namespace, :uri, :fields
     def initialize(v)
       @namespace = v[:info][:namespace]
       @uri = v[:info][:uri]
       @fields = init_fields(v[:fields])
+      add_field_methods
     end
 
     private
@@ -25,6 +17,14 @@ module TVF
         hash[k] = Field.new(v)
       end
       hash
+    end
+
+    def add_field_methods
+      fields.each_key do |k|
+        define_singleton_method(k) do
+          fields[k]
+        end
+      end
     end
   end
 end

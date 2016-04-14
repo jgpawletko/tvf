@@ -68,5 +68,22 @@ module TVF
       subject { Vocabulary.new(valid_args).uri }
       it { should == 'http://purl.org/dc/terms/' }
     end
+
+    describe 'field singleton methods' do
+      let(:field_arg) {
+        {
+          data_type: 'integer',
+          facetable: true,
+          indexed: true,
+          mandatory: true,
+          multiple: false,
+          searchable: false,
+          stored: true
+        }
+      }
+      let(:expected) { Field.new(field_arg) }
+      subject { Vocabulary.new(valid_args).date }
+      it { should == expected }
+    end
   end
 end
