@@ -16,6 +16,10 @@ module TVF
       result && uri_valid?
     end
 
+    def all
+      fields.keys
+    end
+
     private
 
     def init_fields(arg)

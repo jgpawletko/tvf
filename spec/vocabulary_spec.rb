@@ -123,5 +123,13 @@ module TVF
         it { should_not be_valid }
       end
     end
+
+    describe 'selectors' do
+      context '#all' do
+        let(:expected) { [:title, :identifier, :contributor, :creator, :date] }
+        subject { Vocabulary.new(valid_args).all }
+        it { should == expected }
+      end
+    end
   end
 end
