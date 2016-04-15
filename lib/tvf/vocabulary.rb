@@ -20,6 +20,10 @@ module TVF
       fields.keys
     end
 
+    def multiple
+      fields.keys.select { |k| fields[k].multiple }
+    end
+
     private
 
     def init_fields(arg)

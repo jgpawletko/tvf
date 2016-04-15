@@ -130,6 +130,11 @@ module TVF
         subject { Vocabulary.new(valid_args).all }
         it { should == expected }
       end
+      context '#multiple' do
+        let(:expected) { [:title, :contributor, :creator] }
+        subject { Vocabulary.new(valid_args).multiple }
+        it { should == expected }
+      end
     end
   end
 end
