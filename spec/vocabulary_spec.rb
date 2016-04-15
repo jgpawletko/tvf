@@ -123,5 +123,28 @@ module TVF
         it { should_not be_valid }
       end
     end
+
+    describe 'selectors' do
+      context '#all' do
+        let(:expected) { [:title, :identifier, :contributor, :creator, :date] }
+        subject { Vocabulary.new(valid_args).all }
+        it { should == expected }
+      end
+      context '#multiple' do
+        let(:expected) { [:title, :contributor, :creator] }
+        subject { Vocabulary.new(valid_args).multiple }
+        it { should == expected }
+      end
+      context '#single' do
+        let(:expected) { [:identifier, :date] }
+        subject { Vocabulary.new(valid_args).single }
+        it { should == expected }
+      end
+      context '#facetable' do
+        let(:expected) { [:contributor, :creator, :date] }
+        subject { Vocabulary.new(valid_args).facetable }
+        it { should == expected }
+      end
+    end
   end
 end

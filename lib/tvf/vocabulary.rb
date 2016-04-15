@@ -16,6 +16,22 @@ module TVF
       result && uri_valid?
     end
 
+    def all
+      fields.keys
+    end
+
+    def multiple
+      fields.keys.select { |k| fields[k].multiple }
+    end
+
+    def single
+      fields.keys.select { |k| !fields[k].multiple }
+    end
+
+    def facetable
+      fields.keys.select { |k| fields[k].facetable }
+    end
+
     private
 
     def init_fields(arg)
