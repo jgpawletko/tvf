@@ -28,6 +28,10 @@ module TVF
       fields.keys.select { |k| !fields[k].multiple }
     end
 
+    def facetable
+      fields.keys.select { |k| fields[k].facetable }
+    end
+
     private
 
     def init_fields(arg)

@@ -140,6 +140,11 @@ module TVF
         subject { Vocabulary.new(valid_args).single }
         it { should == expected }
       end
+      context '#facetable' do
+        let(:expected) { [:contributor, :creator, :date] }
+        subject { Vocabulary.new(valid_args).facetable }
+        it { should == expected }
+      end
     end
   end
 end
