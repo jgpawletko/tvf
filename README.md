@@ -1,8 +1,13 @@
 # TVF
+[![Build Status](https://travis-ci.org/jgpawletko/tvf.svg?branch=master)](https://travis-ci.org/jgpawletko/tvf)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tvf`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Overview
+This gem is being developed to explore refactoring options for
+[NYULibraries/Ichabod](https://github.com/NYULibraries/ichabod) project.
 
-TODO: Delete this and the text above, and describe your gem
+## Status
+#### In Development
+
 
 ## Installation
 
