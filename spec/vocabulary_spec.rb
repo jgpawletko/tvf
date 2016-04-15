@@ -135,6 +135,11 @@ module TVF
         subject { Vocabulary.new(valid_args).multiple }
         it { should == expected }
       end
+      context '#single' do
+        let(:expected) { [:identifier, :date] }
+        subject { Vocabulary.new(valid_args).single }
+        it { should == expected }
+      end
     end
   end
 end

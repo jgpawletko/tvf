@@ -24,6 +24,10 @@ module TVF
       fields.keys.select { |k| fields[k].multiple }
     end
 
+    def single
+      fields.keys.select { |k| !fields[k].multiple }
+    end
+
     private
 
     def init_fields(arg)
