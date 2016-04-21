@@ -2,7 +2,7 @@ module TVF
   # class stores field attributes
   class Field
 
-    VALID_DATA_TYPES = %w(text integer).freeze
+    VALID_DATA_TYPES = %w(text integer date).freeze
     DATA_TYPE_ATTRIBUTES = [:data_type].freeze
     BOOLEAN_ATTRIBUTES = [:facetable, :indexed, :mandatory, :multiple,
                           :searchable, :stored].freeze

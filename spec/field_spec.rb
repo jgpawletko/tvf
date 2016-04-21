@@ -23,7 +23,17 @@ module TVF
       x
     end
 
-    let(:different_args) do
+    let(:valid_args_data_type_date) do
+      { data_type: 'date',
+        facetable: true,
+        indexed: true,
+        mandatory: true,
+        multiple: false,
+        searchable: false,
+        stored: true }
+    end
+
+    let(:valid_args_data_type_text) do
       { data_type: 'text',
         facetable: true,
         indexed: true,
@@ -34,8 +44,18 @@ module TVF
     end
 
     describe '#valid' do
-      context 'with valid arguments' do
+      context 'with valid arguments, data_type integer' do
         subject { Field.new(valid_args) }
+        it { should be_valid }
+      end
+
+      context 'with different valid arguments, data_type date' do
+        subject { Field.new(valid_args_data_type_date) }
+        it { should be_valid }
+      end
+
+      context 'with different valid arguments, data_type text' do
+        subject { Field.new(valid_args_data_type_text) }
         it { should be_valid }
       end
 
@@ -57,7 +77,7 @@ module TVF
         it { should == other }
       end
       context 'with different object' do
-        let(:other) { Field.new(different_args) }
+        let(:other) { Field.new(valid_args_data_type_date) }
         subject { Field.new(valid_args) }
         it { should_not == other }
       end
