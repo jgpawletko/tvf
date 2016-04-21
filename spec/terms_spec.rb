@@ -22,5 +22,17 @@ module TVF
                    :restrictions, :series, :version]
       end
     end
+
+    describe '#multiple' do
+      subject { Terms.new(valid_args).multiple }
+      it do
+        should == [:title, :contributor, :creator, :date,
+                   :description, :format, :language, :publisher, :relation,
+                   :rights, :subject, :type, :addinfolink, :addinfotext,
+                   :data_provider, :discoverable, :geometry, :isbn,
+                   :location, :subject_spatial, :subject_temporal, :available,
+                   :citation, :edition, :series, :version]
+      end
+    end
   end
 end
