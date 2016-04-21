@@ -16,14 +16,14 @@ e.g., are the different selector methods described below (and implemented in thi
 ## Available Selectors
 ```
 Terms#all             # => all fields from all vocabularies (array of symbols)  
-Terms#multiple        # => all fields from all vocabularies where multiple == true  
-Terms#single          # => all fields from all vocabularies where single   == true  
-Terms#facetable       # ...  
+Terms#multiple        # => all fields from all vocabularies where multiple  == true  
+Terms#single          # => all fields from all vocabularies where single    == true  
+Terms#facetable       # => all fields from all vocabularies where facetable == true  
 
 Vocabulary#all        # => all fields from this vocabulary (array of symbols)
-Vocabulary#multiple   # => all fields from this vocabulary where multiple == true
-Vocabulary#single     # => all fields from this vocabulary where single   == true
-Vocabulary#facetable  # ...
+Vocabulary#multiple   # => all fields from this vocabulary where multiple  == true
+Vocabulary#single     # => all fields from this vocabulary where single    == true
+Vocabulary#facetable  # => all fields from this vocabulary where facetable == true
 ```
 
 ## Dynamically generated methods:
