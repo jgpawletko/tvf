@@ -19,6 +19,10 @@ module TVF
       vocabs.values.inject([]) { |a, e| a.push(*e.multiple) }
     end
 
+    def single
+      vocabs.values.inject([]) { |a, e| a.push(*e.single) }
+    end
+
     private
 
     def init_vocabularies(arg)

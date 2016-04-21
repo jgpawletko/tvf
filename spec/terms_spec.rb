@@ -34,5 +34,12 @@ module TVF
                    :citation, :edition, :series, :version]
       end
     end
+
+    describe '#single' do
+      subject { Terms.new(valid_args).single }
+      it do
+        should == [:identifier, :repo, :resource_set, :restrictions]
+      end
+    end
   end
 end
