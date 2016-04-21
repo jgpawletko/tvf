@@ -7,33 +7,90 @@ This gem is being developed to explore refactoring options for
 
 ## Status
 #### In Development
+This code is a proof-of-concept and the interface needs to be validated  
+against actual needs, e.g., are the different selector methods described  
+below (and implmeneted in this gem) useful?  
 
 
-## Installation
+## Classes
+`Terms`, `Vocabulary`, `Field`
 
-Add this line to your application's Gemfile:
 
-```ruby
-gem 'tvf'
+## Available Selectors
+```
+Terms#all             # => all fields from all vocabularies (array of symbols)  
+Terms#multiple        # => all fields from all vocabularies where multiple == true  
+Terms#single          # => all fields from all vocabularies where single   == true  
+Terms#facetable       # ...  
+Terms#mandatory
+
+Vocabulary#all        # => all fields from this vocabulary (array of symbols)
+Vocabulary#multiple   # => all fields from this vocabulary where multiple == true
+Vocabulary#single     # => all fields from this vocabulary where single   == true
+Vocabulary#facetable  # ...
+Vocabulary#mandatory
 ```
 
-And then execute:
+## Dynamically generated methods:
+Dynamic programming is used to create singleton methods.  
+The keys of the hashes passed to the constructors are used for the method names.
 
-    $ bundle
+For instance,
+```
+my_cool_hash = {
+                foo: {...},
+                bar: {...},
+                baz: {...}
+				}
 
-Or install it yourself as:
+my_terms = TVP::Terms.new(my_cool_hash)
+```
 
-    $ gem install tvf
+After instantiation, the `my_terms` object will respond to  
+```
+my_terms.foo
+my_terms.bar  
+my_terms.baz  
+```
 
-## Usage
+This technique is used in other classes as well.
 
-TODO: Write usage instructions here
 
-## Development
+## Examples:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+require 'tvf'
+
+# YAML file contains a set of "vocabulary" keys
+# e.g., :dcterms, :ichabod, :nyucore
+data = Utils.symbolize_keys(YAML.load_file('metadata_fields.yml'))[:terms][:vocabulary]
+
+# instantiate Terms object
+my_terms = TVF::Terms.new(data)
+
+my_terms.vocabularies
+=> [:dcterms, :ichabod, :nyucore]
+
+my_terms.dcterms.facetable
+=> [:contributor, :creator, :format, :language, :subject]
+
+my_terms.nyucore.uri
+=> "http://harper.bobst.nyu.edu/data/nyucore#"
+
+my_terms.all
+=> [:title, :identifier, :contributor, :creator, :date, :description,
+   :format, :language, :publisher, :relation, :rights, :subject,
+   :type, :addinfolink, :addinfotext, :data_provider, :discoverable,
+   :geometry, :isbn, :location, :repo, :resource_set, :subject_spatial,
+   :subject_temporal, :available, :citation, :edition, :restrictions, :series,
+   :version]
+
+my_terms.ichabod.multiple
+=> [:addinfolink, :addinfotext, :data_provider, :discoverable, :geometry,
+    :isbn, :location, :subject_spatial, :subject_temporal]
+
+```
 
 ## Contributing
 
@@ -43,4 +100,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
