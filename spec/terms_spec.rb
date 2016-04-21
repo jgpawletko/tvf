@@ -41,5 +41,12 @@ module TVF
         should == [:identifier, :repo, :resource_set, :restrictions]
       end
     end
+
+    describe '#facetable' do
+      subject { Terms.new(valid_args).facetable }
+      it do
+        should == [:contributor, :creator, :format, :language, :subject]
+      end
+    end
   end
 end

@@ -23,6 +23,10 @@ module TVF
       vocabs.values.inject([]) { |a, e| a.push(*e.single) }
     end
 
+    def facetable
+      vocabs.values.inject([]) { |a, e| a.push(*e.facetable) }
+    end
+
     private
 
     def init_vocabularies(arg)
