@@ -5,6 +5,7 @@ module TVF
 
     def initialize(args)
       @vocabs = init_vocabularies(args)
+      add_vocabulary_methods
     end
 
     def vocabularies
@@ -35,6 +36,14 @@ module TVF
         hash[k] = Vocabulary.new(v)
       end
       hash
+    end
+
+    def add_vocabulary_methods
+      vocabs.each_key do |k|
+        define_singleton_method(k) do
+          vocabs[k]
+        end
+      end
     end
   end
 end

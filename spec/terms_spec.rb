@@ -23,7 +23,6 @@ module TVF
                      :restrictions, :series, :version]
         end
       end
-
       describe '#multiple' do
         subject { Terms.new(valid_args).multiple }
         it do
@@ -35,20 +34,24 @@ module TVF
                      :citation, :edition, :series, :version]
         end
       end
-
       describe '#single' do
         subject { Terms.new(valid_args).single }
         it do
           should == [:identifier, :repo, :resource_set, :restrictions]
         end
       end
-
       describe '#facetable' do
         subject { Terms.new(valid_args).facetable }
         it do
           should == [:contributor, :creator, :format, :language, :subject]
         end
       end
+    end
+
+    describe 'vocabulary singleton methods' do
+      let(:expected) { valid_args[:dcterms][:info][:uri] }
+      subject { Terms.new(valid_args).dcterms.uri }
+      it { should == expected }
     end
   end
 end
