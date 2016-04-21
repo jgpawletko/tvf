@@ -11,6 +11,10 @@ module TVF
       vocabs.keys
     end
 
+    def all
+      vocabs.values.inject([]) { |a, e| a.push(*e.all) }
+    end
+
     private
 
     def init_vocabularies(arg)
