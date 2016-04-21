@@ -19,13 +19,11 @@ Terms#all             # => all fields from all vocabularies (array of symbols)
 Terms#multiple        # => all fields from all vocabularies where multiple == true  
 Terms#single          # => all fields from all vocabularies where single   == true  
 Terms#facetable       # ...  
-Terms#mandatory
 
 Vocabulary#all        # => all fields from this vocabulary (array of symbols)
 Vocabulary#multiple   # => all fields from this vocabulary where multiple == true
 Vocabulary#single     # => all fields from this vocabulary where single   == true
 Vocabulary#facetable  # ...
-Vocabulary#mandatory
 ```
 
 ## Dynamically generated methods:
