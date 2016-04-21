@@ -4,6 +4,11 @@ require 'yaml'
 module TVF
   describe Terms do
     let(:valid_args) { Utils.symbolize_keys(YAML.load_file('spec/fixtures/metadata_fields.yml'))[:terms][:vocabulary] }
+    let(:invalid_args) do
+      x = Utils.symbolize_keys(YAML.load_file('spec/fixtures/metadata_fields.yml'))[:terms][:vocabulary]
+      x[:dcterms][:info][:uri] = nil
+      x
+    end
 
     describe '#vocabularies' do
       subject { Terms.new(valid_args).vocabularies }
@@ -52,6 +57,17 @@ module TVF
       let(:expected) { valid_args[:dcterms][:info][:uri] }
       subject { Terms.new(valid_args).dcterms.uri }
       it { should == expected }
+    end
+
+    describe '#valid?' do
+      context 'with valid args' do
+        subject { Terms.new(valid_args) }
+        it { should be_valid }
+      end
+      context 'with invalid args' do
+        subject { Terms.new(invalid_args) }
+        it { should_not be_valid }
+      end
     end
   end
 end
