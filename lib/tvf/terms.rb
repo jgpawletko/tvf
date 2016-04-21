@@ -12,6 +12,10 @@ module TVF
       vocabs.keys
     end
 
+    def valid?
+      vocabularies_valid?
+    end
+
     def all
       vocabs.values.inject([]) { |a, e| a.push(*e.all) }
     end
@@ -44,6 +48,10 @@ module TVF
           vocabs[k]
         end
       end
+    end
+
+    def vocabularies_valid?
+      vocabs.values.inject(true) { |a, e| a && e.valid? }
     end
   end
 end
