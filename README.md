@@ -7,14 +7,11 @@ This gem is being developed to explore refactoring options for
 
 ## Status
 #### In Development
-This code is a proof-of-concept and the interface needs to be validated  
-against actual needs, e.g., are the different selector methods described  
-below (and implmeneted in this gem) useful?  
-
+This code is a proof-of-concept and the interface needs to be validated against actual needs,  
+e.g., are the different selector methods described below (and implemented in this gem) useful?  
 
 ## Classes
 `Terms`, `Vocabulary`, `Field`
-
 
 ## Available Selectors
 ```
